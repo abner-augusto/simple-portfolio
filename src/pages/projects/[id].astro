@@ -1,54 +1,78 @@
-
 ---
 import { getCollection, render } from "astro:content";
 import { Image } from "astro:assets";
 import Layout from "../../layouts/Layout.astro";
-import BackBtn from "@/components/BackBtn.astro";
 import BackToTop from "../../components/BackToTop.astro";
+import DefaultGallery from "@/components/DefaultGallery.jsx";
+import { buttonVariants } from "@/components/ui/button";
+import { cn } from "@/lib/utils";
 
 export async function getStaticPaths() {
-    const posts = await getCollection('projects');
-    return posts.map(post => ({
-        params: { id: post.id },
-        props: { post },
-    }));
+  const posts = await getCollection('projects');
+  return posts.map(post => ({
+    params: { id: post.id },
+    props: { post }
+  }));
 }
 
 const { post } = Astro.props;
 const { title, summary, tags, cover, ogImage, url } = post.data;
-
 const { Content } = await render(post);
 
+// Glob import all gallery images from content/projects/images/<slug>/gallery
+  const allModules = import.meta.glob(
+  '/src/content/projects/images/*/gallery/*.{jpg,jpeg,webp}',
+  { eager: true, query: '?url', import: 'default' }
+);
+
+// Filter only files for this project ID
+const galleryImages = Object.entries(allModules)
+  .filter(([file]) => file.includes(`/src/content/projects/images/${post.id}/gallery/`))
+  .map(([, url]) => url)
+  .sort();
 ---
+
 <Layout title={title} description={summary} imageOg={ogImage} scrollSmooth={true}>
-    <>
-        <div class="flex justify-center mt-10">
-            <BackBtn/>
-        </div>
-        <div class="flex flex-col gap-6 justify-center items-center">
-            <h1 class="text-3xl font-bold text-center">{title}</h1>
-            <p class="text-sm text-n500 dark:text-primary-light ">
-                {tags.join(', ')}
-            </p>
-        </div>
-        <Image transition:name={`${post.id}-image`} class="rounded-2xl" src={cover} alt="Main project image"/>
-        <p>
-            {summary}
-        </p>
-        <a href={url}>
-            Visit the project ↗
-        </a>
+  <>
+    <div class="flex justify-center mt-10">
+      {/* Replace BackBtn with a styled anchor link */}
+      <a
+        href="/projects"
+        aria-label="Back to Projects List"
+        class={cn(
+          buttonVariants({ size: 'icon', variant: 'ghost' }), // Use button variants or direct classes
+          "h-10 w-10 rounded-full text-n700 bg-primary-light dark:bg-primary-dark hover:bg-primary-hover-light dark:hover:bg-primary-hover-dark" // Replicate BackBtn styling
+        )}
+      >
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="h-6 w-6">
+          <path d="M7.82843 10.9999H20V12.9999H7.82843L13.1924 18.3638L11.7782 19.778L4 11.9999L11.7782 4.22168L13.1924 5.63589L7.82843 10.9999Z"></path>
+        </svg>
+      </a>
+    </div>
 
-        <article id="article" class="mt-8 prose dark:prose-invert">
-            <Content/>
-        </article>
-        <BackToTop />
-    </>
+    <!-- Header -->
+    <div class="flex flex-col gap-6 justify-center items-center">
+      <h1 class="text-3xl font-bold text-center">{title}</h1>
+      <p class="text-sm text-n500 dark:text-primary-light">{tags.join(', ')}</p>
+    </div>
+
+    <!-- Cover Image -->
+    <Image transition:name={`${post.id}-image`} class="rounded-2xl" src={cover} alt={title} />
+
+    <!-- Summary & Link -->
+    <p class="mt-4">{summary}</p>
+    <a href={url} class="text-primary-light underline mt-2 block">Visit the project ↗</a>
+
+    <!-- Content -->
+    <article id="article" class="mt-8 prose dark:prose-invert">
+      <Content />
+    </article>
+
+    <!-- Gallery -->
+    {galleryImages.length > 0 && (
+      <DefaultGallery images={galleryImages} client:visible />
+    )}
+
+    <BackToTop />
+  </>
 </Layout>
-
-<style is:global>
-    h2 {
-        @apply text-2xl font-bold my-4;
-    }
-</style>
-
