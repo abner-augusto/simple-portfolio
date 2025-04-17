@@ -1,25 +1,30 @@
 ---
-
+// components imports (Astro file)
 ---
 
-<div class="flex justify-center mt-10">
-    <button id="back-to-top" class="inline-flex items-center justify-center gap-2 whitespace-nowrap text-sm font-medium [&_svg]:size-4 [&_svg]:shrink-0">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
-            <path d="M13.0001 7.82843V20H11.0001V7.82843L5.63614 13.1924L4.22192 11.7782L12.0001 4L19.7783 11.7782L18.3641 13.1924L13.0001 7.82843Z"></path>
-        </svg>
-        <span>Back to Top</span>
-    </button>
-</div>
+<!--
+  Alternate implementation using an anchor to '#top' and global smooth scrolling
+  Ensure your <html> or <body> has scroll-behavior:smooth in global styles.
+-->
 
-<script is:inline>
-    /** Scrolls the document to the top when
-     * the "Back to Top" button is clicked. */
-    function backToTop() {
-        document.querySelector("#back-to-top")?.addEventListener("click", () => {
-            document.body.scrollTop = 0; // For Safari
-            document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
-        });
+<style is:global>
+    html {
+      scroll-behavior: smooth;
     }
-
-    backToTop();
-</script>
+  </style>
+  
+  <div class="flex justify-center mt-10">
+    <!-- Anchor link scrolls to <body id="top"> or itself with no JS listener needed -->
+    <a
+      href="#top"
+      id="back-to-top"
+      class="inline-flex items-center justify-center gap-2 text-sm font-medium rounded-full ring-offset-white transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-neutral-950 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 dark:ring-offset-neutral-950 dark:focus-visible:ring-neutral-300 h-10 text-n700 bg-primary-light dark:bg-primary-dark hover:bg-primary-hover-light dark:hover:bg-primary-hover-dark px-4"
+      aria-label="Back to Top"
+    >
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="h-[1em] w-auto">
+        <path d="M13.0001 7.82843V20H11.0001V7.82843L5.63614 13.1924L4.22192 11.7782L12.0001 4L19.7783 11.7782L18.3641 13.1924L13.0001 7.82843Z" />
+      </svg>
+      <span>Back to Top</span>
+    </a>
+  </div>
+  
