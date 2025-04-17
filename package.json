@@ -8,12 +8,17 @@
   "author": {
     "name": "Victor Alvarado"
   },
-  "homepage": "https://simple-portfolio.vicbox.dev",
+  "homepage": "https://portfolio.integrarte.arq.br",
   "contributors": [
     {
       "name": "Victor Alvarado",
       "email": "victoralvarado.dev@gmail.com",
       "url": "https://victoralvarado.dev"
+    },
+    {
+      "name": "Abner Augusto Souza",
+      "email": "abner@integrarte.arq.br",
+      "url": "https://www.integrarte.arq.br"
     }
   ],
   "keywords": [
@@ -29,7 +34,7 @@
     "url": ""
   },
   "scripts": {
-    "dev": "astro dev",
+    "dev": "astro dev --host",
     "start": "astro dev",
     "build": "astro check && astro build",
     "preview": "astro preview",
@@ -53,6 +58,7 @@
     "lucide-react": "^0.456.0",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
+    "react-image-gallery": "^1.4.0",
     "tailwind-merge": "^2.5.4",
     "tailwindcss": "^3.4.14",
     "tailwindcss-animate": "^1.0.7",
