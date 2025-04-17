@@ -1,78 +1,83 @@
 export const SITE = {
-    website: "https://simple-portfolio.vicbox.dev", // replace this with your deployed domain
-    title: "Simple Portfolio",
-    description: "A simple but beautiful portfolio created with Astro",
-    tags: ["portfolio", "Resume cv", "Astro"],
+    website: "https://portfolio.integrarte.arq.br", // replace this with your deployed domain
+    title: "Portfolio - Abner Augusto Souza",
+    description: "Portfolio of Abner Augusto Souza, Architect and Creative Developer",
+    tags: ["portfolio", "Resume cv", "creative developer", "game developer", "programming", "architecture", "urban design"],
     ogImage: "/og-image.webp",
     logo: "logo",
     logoText: "Portfolio",
     lang: "en",
-    favicon: "/favicon.png",
+    favicon: "/favicon-IAR.png",
     repository: "https://github.com/vito8916/simple-portfolio.git",
-    author: "Victor Alvarado",
-    profile: "https://victoralvarado.dev/",
+    author: "Abner Augusto Souza",
+    profile: "https://www.integrarte.arq.br/",
 }
 
 export const ME = {
-    name: "VicBox Dot Dev",
-    profession: "Software Engineer | Full Stack Developer",
-    profileImage: "pp2.png",
+    name: "Abner Augusto Souza",
+    profession: "Architect | Creative Developer",
+    profileImage: "profile.jpg",
     profileFacts: [
         {
-            value: 10,
+            value: 8,
             description: "Years of Experience"
         },
         {
-            value: 5,
+            value: 45,
             description: "Completed Projects"
         },
         {
-            value: 4,
+            value: 40,
             description: "Satisfied Clients"
         }
     ],
     contactInfo: {
-        email: "vicbox.dev@vicbox.dev",
-        linkedin: "https://www.linkedin.com/in/victor-alvaradohn",
-        resumeDoc: "resume.pdf",
+        email: "abner@integrarte.arq.br",
+        linkedin: "https://www.linkedin.com/in/abner-iar/",
+        resumeDoc: "resume2025.pdf",
     },
-    aboutMe: "I am a software engineer with a passion for web development. I have experience in building web " + "applications using modern technologies. I am a self-taught developer who enjoys learning new things and " + "sharing knowledge with others.",
+    aboutMe: "I am an architect and urban designer specializing in public spaces and commercial architecture. " +
+    "Alongside my architectural career, I have developed a passion for programming and creating interactive experiences " +
+    "as a Game Developer and Technical Artist, with nearly two years of dedicated practice. " +
+    "Currently, I am expanding my technical expertise by pursuing a master's degree in Computer Science, " +
+    "with a focus on Computer Graphics at the Federal University of Ceará, driven by a continuous enthusiasm " +
+    "for learning and sharing knowledge.",
 }
 
 export const SOCIALS = [
     {
         name: "Twitter",
-        url: "https://twitter.com/vicbox.dev",
+        url: "https://x.com/abn3r_augu5to",
         icon: "twitter-x-fill",
         show: true
     },
     {
         name: "Facebook",
-        url: "https://www.facebook.com/vicbox.dev",
+        url: "",
         icon: "facebook-fill",
         show: false
     },
     {
         name: "Instagram",
-        url: "https://www.instagram.com/vicbox.dev",
+        url: "",
         icon: "instagram-fill",
-        show: true
+        show: false
     },
     {
         name: "Youtube",
-        url: "https://www.youtube.com/vicbox.dev",
+        url: "",
         icon: "youtube-fill",
-        show: true
+        show: false
     },
     {
         name: "TikTok",
-        url: "https://tiktok.com/vicbox.dev",
+        url: "",
         icon: "tik-fill",
         show: false
     },
     {
         name: "GitHub",
-        url: "https://github.com/vicbox.dev",
+        url: "https://github.com/abner-augusto",
         icon: "github-fill",
         show: true
     }
