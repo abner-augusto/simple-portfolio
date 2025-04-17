@@ -42,33 +42,62 @@ interface WorkExperience {
  * @property {Array<string>} goals - A list of goals or achievements within the job.
  * @property {boolean} currentJob - A flag indicating if the job is the current one.
  */
-const workExperience:WorkExperience[] = [
+const workExperience: WorkExperience[] = [
     {
-        title: "Frontend Developer",
-        startDate: "2020-03-10",
-        company: "Google Inc",
-        location: "United States",
-        description: "Developed and maintained web applications using React, NextJs, and Tailwind CSS.",
+        title: "Architect / Visualization and Video Producer",
+        startDate: "2024-07-01",
+        company: "Integrarte.Arq",
+        location: "Fortaleza, CE, Brazil",
+        description: "Currently working with architectural visualization and audiovisual production for real estate and construction sectors.",
         goals: [
-            "Developed and maintained web applications using React, NodeJs, and MongoDB.",
-            "Worked with the team to develop and maintain web applications using React, NodeJs, and MongoDB.",
-            "Created and maintained web applications using React, NodeJs, and MongoDB.",
+            "Produce high-quality renders and animation videos for real estate marketing.",
+            "Develop visual content tailored for construction companies and agencies.",
+            "Work closely with clients to translate architectural concepts into compelling media.",
         ],
         currentJob: true,
     },
     {
-        title: "Software Engineer",
-        startDate: "2018-03-10",
-        endDate: "2020-03-10",
-        company: "Company Name",
-        location: "United States",
-        description: "Developed and maintained web applications using React, NodeJs, and MongoDB.",
+        title: "Tech Artist / Game Developer / 3D Designer",
+        startDate: "2022-12-01",
+        endDate: "2024-07-01",
+        company: "Bugaboo Studio",
+        location: "Fortaleza, CE, Brazil",
+        description: "Worked on the development of immersive and interactive experiences for VR, creative coding, and photogrammetry.",
         goals: [
-            "Developed and maintained web applications using React, NodeJs, and MongoDB.",
-            "Worked with the team to develop and maintain web applications using React, NodeJs, and MongoDB.",
-            "Created and maintained web applications using React, NodeJs, and MongoDB.",
+            "Developed Virtual Reality applications focused on interactivity and immersion.",
+            "Created 3D models and digital assets for real-time engines and game prototypes.",
+            "Applied creative coding techniques in the development of experimental visual applications.",
+        ],
+        currentJob: false,
+    },
+    {
+        title: "Architect and Urban Planner",
+        startDate: "2018-05-01",
+        endDate: "2022-12-01",
+        company: "Integrarte.Arq",
+        location: "Fortaleza, CE, Brazil",
+        description: "Co-founded the firm and led the design and delivery of high-quality commercial and residential projects.",
+        goals: [
+            "Directed the creative process and client communication for architecture projects.",
+            "Produced architectural visualizations and technical documentation.",
+            "Oversaw project delivery and team coordination from concept to execution.",
+        ],
+        currentJob: false,
+    },
+    {
+        title: "Architect and 3D Designer",
+        startDate: "2016-02-01",
+        endDate: "2018-04-01",
+        company: "Marrocos Aragão Arquitetura",
+        location: "Fortaleza, CE, Brazil",
+        description: "Executed architectural and urban planning projects with emphasis on residential developments and 3D visualization.",
+        goals: [
+            "Designed and developed residential architecture and urban plans.",
+            "Created 3D models and renderings for client presentations and competitions.",
+            "Collaborated with multidisciplinary teams to meet design and planning goals.",
         ],
         currentJob: false,
     },
 ];
+
 export default workExperience;
