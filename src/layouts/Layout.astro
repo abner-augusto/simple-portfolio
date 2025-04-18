@@ -39,6 +39,7 @@ const absoluteImageOg = imageOg.startsWith('http')
   <meta name="msapplication-TileColor" content="#000000" />
   <meta name="viewport" content="width=device-width" />
   <meta charset="UTF-8" />
+  <meta name="darkreader-lock" />
   <meta name="generator" content={Astro.generator} />
 
   <meta name="title" content={title} />
@@ -50,6 +51,7 @@ const absoluteImageOg = imageOg.startsWith('http')
   <link rel="canonical" href={canonicalURL} />
 
   <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website" />
   <meta property="og:title" content={title} />
   <meta property="og:description" content={description} />
   <meta property="og:url" content={canonicalURL} />
