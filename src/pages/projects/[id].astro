@@ -16,36 +16,45 @@ export async function getStaticPaths() {
 }
 
 const { post } = Astro.props;
-const { title, summary, tags, cover, ogImage, url } = post.data;
+const { title, summary, tags, cover, url } = post.data;
 const { Content } = await render(post);
 
+// Import the OG image URL bundling with Astro
+const ogImport = import.meta.glob<string>(
+  '/src/content/projects/images/*/og-image.{jpg,jpeg,png,webp}',
+  { eager: true, import: 'default', query: '?url' }
+) as Record<string, string>;
+
+// Resolve the OG image URL or fallback to an empty string
+const ogImageUrl: string = ogImport[`/src/content/projects/images/${post.id}/og-image.jpg`] ?? '';
+
 // Glob import all gallery images from content/projects/images/<slug>/gallery
-  const allModules = import.meta.glob(
+const allModules = import.meta.glob<string>(
   '/src/content/projects/images/*/gallery/*.{jpg,jpeg,webp}',
-  { eager: true, query: '?url', import: 'default' }
-);
+  { eager: true, import: 'default', query: '?url' }
+) as Record<string, string>;
 
 // Filter only files for this project ID
-const galleryImages = Object.entries(allModules)
+const galleryImages: string[] = Object.entries(allModules)
   .filter(([file]) => file.includes(`/src/content/projects/images/${post.id}/gallery/`))
   .map(([, url]) => url)
   .sort();
 ---
 
-<Layout title={title} description={summary} imageOg={ogImage} scrollSmooth={true}>
+<Layout title={title} description={summary} imageOg={ogImageUrl} scrollSmooth={true}>
   <>
     <div class="flex justify-center mt-10">
-      {/* Replace BackBtn with a styled anchor link */}
+      <!-- Back button -->
       <a
         href="/projects"
         aria-label="Back to Projects List"
         class={cn(
-          buttonVariants({ size: 'icon', variant: 'ghost' }), // Use button variants or direct classes
-          "h-10 w-10 rounded-full text-n700 bg-primary-light dark:bg-primary-dark hover:bg-primary-hover-light dark:hover:bg-primary-hover-dark" // Replicate BackBtn styling
+          buttonVariants({ size: 'icon', variant: 'ghost' }),
+          "h-10 w-10 rounded-full text-n700 bg-primary-light dark:bg-primary-dark hover:bg-primary-hover-light dark:hover:bg-primary-hover-dark"
         )}
       >
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="h-6 w-6">
-          <path d="M7.82843 10.9999H20V12.9999H7.82843L13.1924 18.3638L11.7782 19.778L4 11.9999L11.7782 4.22168L13.1924 5.63589L7.82843 10.9999Z"></path>
+          <path d="M7.82843 10.9999H20V12.9999H7.82843L13.1924 18.3638L11.7782 19.778L4 11.9999L11.7782 4.22168L13.1924 5.63589L7.82843 10.9999Z" />
         </svg>
       </a>
     </div>

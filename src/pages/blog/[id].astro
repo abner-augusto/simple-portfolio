@@ -1,53 +1,72 @@
 ---
-import {getCollection, render} from "astro:content";
+import { getCollection, render } from "astro:content";
 import Layout from "../../layouts/Layout.astro";
-import {Image} from "astro:assets";
+import { Image } from "astro:assets";
 import BackToTop from "../../components/BackToTop.astro";
 import { buttonVariants } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 
 export async function getStaticPaths() {
-    const posts = await getCollection('posts');
-    return posts.map(post => ({
-        params: {id: post.id},
-        props: {post},
-    }));
+  const posts = await getCollection('posts');
+  return posts.map(post => ({
+    params: { id: post.id },
+    props: { post },
+  }));
 }
 
-const {post} = Astro.props;
+const { post } = Astro.props;
+const { title, description, tags, cover } = post.data;
+const { Content } = await render(post);
 
-const {title, description, tags, cover} = post.data;
+// Import the OG image URL bundling with Astro
+const ogImport = import.meta.glob<string>(
+  '/src/content/posts/*/cover.{jpg,jpeg,png,webp}',
+  { eager: true, import: 'default', query: '?url' }
+) as Record<string, string>;
 
-const {Content} = await render(post);
+const ogImageUrl: string = 
+  ogImport[`/src/content/posts/${post.id}/cover.jpg`] ?? cover.src.src;
 ---
-<Layout title={title} description={description} imageOg={cover.src.src} scrollSmooth={true}>
-    <>
-        <div class="flex justify-center mt-10">
-          {/* Replace BackBtn with a styled anchor link */}
-          <a
-            href="/blog"
-            aria-label="Back to Blog List"
-            class={cn(
-              buttonVariants({ size: 'icon', variant: 'ghost' }), // Use button variants or direct classes
-              "h-10 w-10 rounded-full text-n700 bg-primary-light dark:bg-primary-dark hover:bg-primary-hover-light dark:hover:bg-primary-hover-dark" // Replicate BackBtn styling
-            )}
-          >
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="h-6 w-6">
-              <path d="M7.82843 10.9999H20V12.9999H7.82843L13.1924 18.3638L11.7782 19.778L4 11.9999L11.7782 4.22168L13.1924 5.63589L7.82843 10.9999Z"></path>
-            </svg>
-          </a>
-        </div>
-        <div class="flex flex-col gap-6 justify-center items-center">
-            <h1 class="text-3xl font-bold text-center">{title}</h1>
-            <p class="text-sm text-n500 dark:text-primary-light ">
-                {tags.join(', ')}
-            </p>
-        </div>
-        <Image transition:name={`${post.id}-image`} class="rounded-2xl h-[400px] object-cover" src={cover.src}
-               alt="Main project image"/>
-        <article id="article" class="mt-8 prose dark:prose-invert">
-            <Content/>
-        </article>
-        <BackToTop />
-    </>
+
+<Layout
+  title={title}
+  description={description}
+  imageOg={ogImageUrl}
+  scrollSmooth={true}
+>
+  <>
+    <div class="flex justify-center mt-10">
+      <!-- Back to Blog List -->
+      <a
+        href="/blog"
+        aria-label="Back to Blog List"
+        class={cn(
+          buttonVariants({ size: 'icon', variant: 'ghost' }),
+          "h-10 w-10 rounded-full text-n700 bg-primary-light dark:bg-primary-dark hover:bg-primary-hover-light dark:hover:bg-primary-hover-dark"
+        )}
+      >
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="h-6 w-6">
+          <path d="M7.82843 10.9999H20V12.9999H7.82843L13.1924 18.3638L11.7782 19.778L4 11.9999L11.7782 4.22168L13.1924 5.63589L7.82843 10.9999Z" />
+        </svg>
+      </a>
+    </div>
+
+    <div class="flex flex-col gap-6 justify-center items-center">
+      <h1 class="text-3xl font-bold text-center">{title}</h1>
+      <p class="text-sm text-n500 dark:text-primary-light">{tags.join(', ')}</p>
+    </div>
+
+    <Image
+      transition:name={`${post.id}-image`}
+      class="rounded-2xl h-[400px] object-cover"
+      src={cover.src}
+      alt={title}
+    />
+
+    <article id="article" class="mt-8 prose dark:prose-invert">
+      <Content />
+    </article>
+
+    <BackToTop />
+  </>
 </Layout>
