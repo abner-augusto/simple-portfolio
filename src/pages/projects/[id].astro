@@ -70,7 +70,11 @@ const galleryImages: string[] = Object.entries(allModules)
 
     <!-- Summary & Link -->
     <p class="mt-4">{summary}</p>
-    <a href={url} class="text-primary-light underline mt-2 block">Visit the project ↗</a>
+    {url && (
+      <a href={url} class="text-primary-light underline mt-2 block" target="_blank" rel="noopener noreferrer">
+        Visit the project ↗
+      </a>
+    )}
 
     <!-- Content -->
     <article id="article" class="mt-8 prose dark:prose-invert">
