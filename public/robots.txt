@@ -1,0 +1,4 @@
+User-agent: *
+Disallow:
+
+Sitemap: https://portfolio.integrarte.arq.br/sitemap-index.xml
