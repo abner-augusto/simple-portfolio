@@ -8,14 +8,16 @@ import AboutMeCC from "../components/AboutMeCC.astro";
 import ProfileFacts from "../components/ProfileFacts.astro";
 ---
 
-<Layout title="Abner Augusto | Portfolio" description="Portfolio of Abner Augusto Souza, Architect and Creative Developer" scrollSmooth={false}>
-    <>
-        <ProfileInfo/>
-        <ProfileFacts/>
-        <ProfileActionButton/>
-        <TabsButtons client:idle>
-            <ProjectsCC slot="portfolio"/>
-            <AboutMeCC slot="about"/>
-        </TabsButtons>
-    </>
+<Layout
+  title="Abner Augusto Souza | Architect & Creative Developer | 3D Visualization Portfolio"
+  description="Explore the portfolio of Abner Souza, an architect and creative developer specializing in architectural visualization, BIM, and interactive experiences."
+  scrollSmooth={false}
+>
+  <ProfileInfo />
+  <ProfileFacts />
+  <ProfileActionButton />
+  <TabsButtons client:idle>
+    <ProjectsCC slot="portfolio" />
+    <AboutMeCC slot="about" />
+  </TabsButtons>
 </Layout>
