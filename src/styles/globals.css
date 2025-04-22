@@ -81,3 +81,7 @@ code {
   font-size: 0.875rem;
   transition: color 0.5s;
 }
+
+html {
+  scroll-padding-top: 5rem; /* match your navbar height */
+}
